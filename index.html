@@ -139,11 +139,11 @@ var extractDriveId = function extractDriveId(url) {
 };
 var processVideoUrl = function processVideoUrl(url) {
   if (!url) return '';
-  var videoId = extractDriveId(url);
-  if (videoId) {
-    return "https://drive.google.com/uc?export=download&confirm=t&id=".concat(videoId);
-  }
   return url;
+};
+var getDrivePreviewUrl = function getDrivePreviewUrl(url) {
+  var videoId = extractDriveId(url);
+  return videoId ? "https://drive.google.com/file/d/".concat(videoId, "/preview?hl=ko") : '';
 };
 var App = function App() {
   var loadInitialData = function loadInitialData() {
@@ -850,35 +850,27 @@ var App = function App() {
     className: "w-full md:w-[70%] bg-black relative flex items-center justify-center min-h-[40vh] md:min-h-[60vh]"
   }, lightboxItem.type === 'video' ? /*#__PURE__*/React.createElement("div", {
     className: "relative w-full h-full flex flex-col items-center justify-center overflow-hidden"
-  }, videoError && extractDriveId(lightboxItem.mediaUrl || lightboxItem.image) ? /*#__PURE__*/React.createElement("div", {
-    className: "relative w-full h-full border-0"
-  }, /*#__PURE__*/React.createElement("iframe", {
-    src: "https://drive.google.com/file/d/".concat(extractDriveId(lightboxItem.mediaUrl || lightboxItem.image), "/preview"),
-    className: "absolute left-0 w-full border-0",
-    style: {
-      top: '-60px',
-      height: 'calc(100% + 60px)'
-    },
-    allow: "autoplay; fullscreen",
-    allowFullScreen: true
-  })) : /*#__PURE__*/React.createElement("video", {
+  }, extractDriveId(lightboxItem.mediaUrl || lightboxItem.image) ? /*#__PURE__*/React.createElement("iframe", {
+    src: getDrivePreviewUrl(lightboxItem.mediaUrl || lightboxItem.image),
+    className: "absolute inset-0 w-full h-full min-h-[40vh] border-0",
+    allow: "autoplay; fullscreen; encrypted-media; picture-in-picture",
+    allowFullScreen: true,
+    loading: "eager",
+    referrerPolicy: "strict-origin-when-cross-origin",
+    title: lightboxItem.title
+  }) : /*#__PURE__*/React.createElement("video", {
     key: lightboxItem.id,
     controls: true,
     controlsList: "nodownload noremoteplayback noplaybackrate",
     disablePictureInPicture: true,
-    autoPlay: true,
     playsInline: true,
-    preload: "auto",
+    preload: "metadata",
     className: "w-full h-full object-contain",
     onError: function onError() {
       return setVideoError(true);
     }
   }, /*#__PURE__*/React.createElement("source", {
-    src: processVideoUrl(lightboxItem.mediaUrl || lightboxItem.image),
-    type: "video/mp4"
-  }), /*#__PURE__*/React.createElement("source", {
-    src: processVideoUrl(lightboxItem.mediaUrl || lightboxItem.image),
-    type: "video/webm"
+    src: processVideoUrl(lightboxItem.mediaUrl || lightboxItem.image)
   }), "\uBE0C\uB77C\uC6B0\uC800\uAC00 \uBE44\uB514\uC624 \uC7AC\uC0DD\uC744 \uC9C0\uC6D0\uD558\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4.")) : /*#__PURE__*/React.createElement("img", {
     src: processImageUrl(lightboxItem.mediaUrl || lightboxItem.image),
     alt: lightboxItem.title,
@@ -994,11 +986,11 @@ var extractDriveId = function extractDriveId(url) {
 };
 var processVideoUrl = function processVideoUrl(url) {
   if (!url) return '';
-  var videoId = extractDriveId(url);
-  if (videoId) {
-    return "https://drive.google.com/uc?export=download&confirm=t&id=".concat(videoId);
-  }
   return url;
+};
+var getDrivePreviewUrl = function getDrivePreviewUrl(url) {
+  var videoId = extractDriveId(url);
+  return videoId ? "https://drive.google.com/file/d/".concat(videoId, "/preview?hl=ko") : '';
 };
 var App = function App() {
   var loadInitialData = function loadInitialData() {
@@ -1705,35 +1697,27 @@ var App = function App() {
     className: "w-full md:w-[70%] bg-black relative flex items-center justify-center min-h-[40vh] md:min-h-[60vh]"
   }, lightboxItem.type === 'video' ? /*#__PURE__*/React.createElement("div", {
     className: "relative w-full h-full flex flex-col items-center justify-center overflow-hidden"
-  }, videoError && extractDriveId(lightboxItem.mediaUrl || lightboxItem.image) ? /*#__PURE__*/React.createElement("div", {
-    className: "relative w-full h-full border-0"
-  }, /*#__PURE__*/React.createElement("iframe", {
-    src: "https://drive.google.com/file/d/".concat(extractDriveId(lightboxItem.mediaUrl || lightboxItem.image), "/preview"),
-    className: "absolute left-0 w-full border-0",
-    style: {
-      top: '-60px',
-      height: 'calc(100% + 60px)'
-    },
-    allow: "autoplay; fullscreen",
-    allowFullScreen: true
-  })) : /*#__PURE__*/React.createElement("video", {
+  }, extractDriveId(lightboxItem.mediaUrl || lightboxItem.image) ? /*#__PURE__*/React.createElement("iframe", {
+    src: getDrivePreviewUrl(lightboxItem.mediaUrl || lightboxItem.image),
+    className: "absolute inset-0 w-full h-full min-h-[40vh] border-0",
+    allow: "autoplay; fullscreen; encrypted-media; picture-in-picture",
+    allowFullScreen: true,
+    loading: "eager",
+    referrerPolicy: "strict-origin-when-cross-origin",
+    title: lightboxItem.title
+  }) : /*#__PURE__*/React.createElement("video", {
     key: lightboxItem.id,
     controls: true,
     controlsList: "nodownload noremoteplayback noplaybackrate",
     disablePictureInPicture: true,
-    autoPlay: true,
     playsInline: true,
-    preload: "auto",
+    preload: "metadata",
     className: "w-full h-full object-contain",
     onError: function onError() {
       return setVideoError(true);
     }
   }, /*#__PURE__*/React.createElement("source", {
-    src: processVideoUrl(lightboxItem.mediaUrl || lightboxItem.image),
-    type: "video/mp4"
-  }), /*#__PURE__*/React.createElement("source", {
-    src: processVideoUrl(lightboxItem.mediaUrl || lightboxItem.image),
-    type: "video/webm"
+    src: processVideoUrl(lightboxItem.mediaUrl || lightboxItem.image)
   }), "\uBE0C\uB77C\uC6B0\uC800\uAC00 \uBE44\uB514\uC624 \uC7AC\uC0DD\uC744 \uC9C0\uC6D0\uD558\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4.")) : /*#__PURE__*/React.createElement("img", {
     src: processImageUrl(lightboxItem.mediaUrl || lightboxItem.image),
     alt: lightboxItem.title,
@@ -2795,12 +2779,14 @@ root.render(/*#__PURE__*/React.createElement(App, null));
 
         const processVideoUrl = (url) => {
             if (!url) return '';
-            let videoId = extractDriveId(url);
-
-            if (videoId) {
-                return `https://drive.google.com/uc?export=download&confirm=t&id=${videoId}`;
-            }
             return url;
+        };
+
+        // Google Drive 영상은 모바일 Safari/Chrome에서 직접 다운로드 URL로
+        // <video>에 연결할 때 재생이 불안정할 수 있으므로 Drive 미리보기 플레이어를 사용합니다.
+        const getDrivePreviewUrl = (url) => {
+            const videoId = extractDriveId(url);
+            return videoId ? `https://drive.google.com/file/d/${videoId}/preview?hl=ko` : '';
         };
 
         const App = () => {
@@ -3325,10 +3311,12 @@ root.render(/*#__PURE__*/React.createElement(App, null));
                                         <div className="relative w-full h-full flex flex-col items-center justify-center overflow-hidden">
                                             {extractDriveId(lightboxItem.mediaUrl || lightboxItem.image) ? (
                                                 <iframe
-                                                    src={`https://drive.google.com/file/d/${extractDriveId(lightboxItem.mediaUrl || lightboxItem.image)}/preview`}
-                                                    className="absolute inset-0 w-full h-full border-0"
+                                                    src={getDrivePreviewUrl(lightboxItem.mediaUrl || lightboxItem.image)}
+                                                    className="absolute inset-0 w-full h-full min-h-[40vh] border-0"
                                                     allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
                                                     allowFullScreen
+                                                    loading="eager"
+                                                    referrerPolicy="strict-origin-when-cross-origin"
                                                     title={lightboxItem.title}
                                                 ></iframe>
                                             ) : (
@@ -3337,14 +3325,13 @@ root.render(/*#__PURE__*/React.createElement(App, null));
                                                     controls
                                                     controlsList="nodownload noremoteplayback noplaybackrate"
                                                     disablePictureInPicture
-                                                    autoPlay
                                                     playsInline
-                                                    preload="auto"
+                                                    preload="metadata"
+                                                    webkit-playsinline="true"
                                                     className="w-full h-full object-contain"
                                                     onError={() => setVideoError(true)}
                                                 >
-                                                    <source src={processVideoUrl(lightboxItem.mediaUrl || lightboxItem.image)} type="video/mp4" />
-                                                    <source src={processVideoUrl(lightboxItem.mediaUrl || lightboxItem.image)} type="video/webm" />
+                                                    <source src={processVideoUrl(lightboxItem.mediaUrl || lightboxItem.image)} />
                                                     브라우저가 비디오 재생을 지원하지 않습니다.
                                                 </video>
                                             )}
@@ -3380,9 +3367,18 @@ root.render(/*#__PURE__*/React.createElement(App, null));
                                     
                                     {lightboxItem.type === 'video' && videoError && (
                                         <div className="mt-8 p-4 bg-rose-500/10 border border-rose-500/20 rounded-xl">
-                                            <p className="text-rose-400 text-[10px] md:text-xs text-center">
-                                                * 트래픽 제한으로 대체 플레이어로 재생 중입니다.<br/>화면의 재생 버튼을 눌러주세요.
+                                            <p className="text-rose-400 text-[10px] md:text-xs text-center mb-3">
+                                                현재 브라우저에서 직접 재생할 수 없습니다. 아래 버튼으로 영상을 열어주세요.
                                             </p>
+                                            <a
+                                                href={processVideoUrl(lightboxItem.mediaUrl || lightboxItem.image)}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="block w-full text-center bg-white/10 hover:bg-white/20 text-white py-2.5 rounded-lg text-xs font-bold transition-colors"
+                                                onClick={(e) => e.stopPropagation()}
+                                            >
+                                                영상 새 창에서 재생
+                                            </a>
                                         </div>
                                     )}
                                 </div>
