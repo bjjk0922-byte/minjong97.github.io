@@ -6535,7 +6535,7 @@ root.render(/*#__PURE__*/React.createElement(App, null));
                                             {extractDriveId(lightboxItem.mediaUrl || lightboxItem.image) ? (
                                                 <iframe
                                                     src={getDrivePreviewUrl(lightboxItem.mediaUrl || lightboxItem.image)}
-                                                    className="absolute inset-0 w-full h-full min-h-[40vh] border-0"
+                                                    className="block w-full h-[60vh] min-h-[280px] border-0 md:absolute md:inset-0 md:h-full md:min-h-[40vh]"
                                                     allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
                                                     allowFullScreen
                                                     loading="eager"
